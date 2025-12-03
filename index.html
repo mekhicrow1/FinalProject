@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mekhi Crow - Labs from semester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: -10px;
+            color: #555;
+            font-weight: normal;
+        }
+
+        .section-title {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            border-bottom: 2px solid #004a9f;
+        }
+
+        .content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: 2px solid #ccc;
+        }
+    </style>
+
+    <script>
+        // toggles open/close for each lab section
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            content.style.display = (content.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</head>
+<body>
+
+<h1>Mekhi Crow - Labs from semester</h1>
+<h3>Student | Graphic Designer</h3>
+
+<!-- About Me -->
+<div class="section-title" onclick="toggleContent('about')">About Me</div>
+<div class="content" id="about">
+    <p>Hello! I'm Mekhi Crow, a sophomore at Midway University</p>
+</div>
+
+<!-- LAB SECTIONS WITH IFRAMES -->
+
+<div class="section-title" onclick="toggleContent('lab1')">Lab 1: simple introduction</div>
+<div class="content" id="lab1">
+    <iframe src="Line.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab2')">Lab 2: simple introduction</div>
+<div class="content" id="lab2">
+    <iframe src="./Counter_Test/index.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab3')">Lab 3: simple introduction</div>
+<div class="content" id="lab3">
+    <iframe src="./Lab3/Qrtimer.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab4')">Lab 4: simple introduction</div>
+<div class="content" id="lab4">
+    <iframe src="./googlepage/Homepage.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab5')">Lab 5: simple introduction</div>
+<div class="content" id="lab5">
+    <iframe src="./BotDoor/BotDoor.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab6')">Lab 6: simple introduction</div>
+<div class="content" id="lab6">
+    <iframe src="./Door2/index.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab7')">Lab 7: simple introduction</div>
+<div class="content" id="lab7">
+    <iframe src="./Fan/Fan.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab8')">Lab 8: simple introduction</div>
+<div class="content" id="lab8">
+    <iframe src="./Color Wheel/index.html"></iframe>
+</div>
+
+<div class="section-title" onclick="toggleContent('lab9')">Lab 9: simple introduction</div>
+<div class="content" id="lab9">
+    <iframe src="Memory_Step7/index.html"></iframe>
+</div>
+
+<div style="background-color:#007bff; color:white; padding:15px; font-size:20px; margin-top:20px;">
+    Video: simple introduction
+</div>
+
+<video controls style="width:100%; margin-top:0;">
+    <source src="HCI Music Video.mp4" type="video/mp4">
+</video>
+
+
+</body>
+</html>
