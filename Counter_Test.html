@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="./CSS/styles.css">
+<title>Counter</title>
+<link rel>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<section class="card">
+<h1 id="title">Counter</h1>
+
+<div id="count" class="value">0</div>
+
+<div class="row">
+        <button id="dec" type="button">LOWER COUNT</button>
+        <button id="inc" type="button">ADD COUNT</button>
+        <button id="reset" type="button" title="Set back to zero">RESET</button>
+</div>
+
+</section>
+</div>
+<script>
+
+
+  
+  // Simple, readable JS (no arrow functions)
+  var valueEl = document.getElementById("count");
+  var decBtn  = document.getElementById("dec");
+  var incBtn  = document.getElementById("inc");
+  var resetBtn= document.getElementById("reset");
+  
+    // Load last value (optional)
+  var count = Number(localStorage.getItem("counter_value") || 0);
+  render();
+  
+  function render(){
+    valueEl.textContent = count; 
+    localStorage.setItem("counter_value", String(count));
+	playDing();
+    // keep it non-negative; disable when zero
+	if (count<=1){
+	decBtn.disabled=true;
+	beep();
+	}else{
+	decBtn.disabled=false;
+	}
+  }
+  
+  function increase(){ count += 1; render(); }
+  function decrease(){ if (count > 0) { count -= 1; render(); } }
+  function reset(){ count = 0; decBtn.disabled=false; render(); }
+
+  incBtn.addEventListener("click", increase);
+  decBtn.addEventListener("click", decrease);
+  resetBtn.addEventListener("click", reset);
+  
+  function beep() {
+      let ctx = new (window.AudioContext || window.webkitAudioContext)();
+      let oscillator = ctx.createOscillator();
+      oscillator.type = "square";   // square wave sounds more "beep-like"
+      oscillator.frequency.value = 440; // 440 Hz = A4 note
+      oscillator.connect(ctx.destination);
+      oscillator.start();
+      oscillator.stop(ctx.currentTime + 0.2); // play for 0.2 sec
+  }
+	
+	
+  function playDing() {
+      let ctx = new (window.AudioContext || window.webkitAudioContext)();
+      let oscillator = ctx.createOscillator();
+      let gain = ctx.createGain();
+
+      oscillator.type = "sine";          // smooth sine wave
+      oscillator.frequency.value = 880;  // pitch of the "ding"
+
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+
+      // fade out smoothly
+      gain.gain.setValueAtTime(1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1);
+
+      oscillator.start();
+      oscillator.stop(ctx.currentTime + 1); // 1 second long
+  }
+</script>
+</body>
+
+</html>

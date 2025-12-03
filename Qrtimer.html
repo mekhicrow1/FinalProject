@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR Code Clock</title>
+  <style>
+    /* Center the page */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+    #qrcode {
+      background-color: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    p.tip {
+      margin-top: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>QR Code Clock</h1>
+  <!-- This is the QR code container, the QR code will be rendered inside this div -->
+  <div id="qrcode"></div>
+  <p class="tip">Please scan with your phone to get the current time. The QR code updates every second.</p>
+
+  <!-- Load QRCode.js (open source, frontend-only) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    /**
+     * Generate the current time string in "HH:MM:SS" format
+     */
+    function getCurrentTimeString() {
+      var now = new Date();
+      // Padding function
+      function pad(num) {
+        return num < 10 ? "0" + num : num;
+      }
+      var hours = pad(now.getHours());
+      var minutes = pad(now.getMinutes());
+      var seconds = pad(now.getSeconds());
+      return hours + ":" + minutes + ":" + seconds;
+    }
+
+    // Used to store the QRCode instance
+    var qr;
+
+    /**
+     * Update the QR code content (generate a new QR code for the current time)
+     */
+    function updateQRCode() {
+      var timeStr = getCurrentTimeString();
+      // If a previous QR code instance exists, clear it first
+      if (qr) {
+        // Clear all child nodes in the container
+        var container = document.getElementById("qrcode");
+        container.innerHTML = "";
+      }
+      // Create a new QR code with content as timeStr
+      qr = new QRCode(document.getElementById("qrcode"), {
+        text: timeStr,
+        width: 200,      // QR code width
+        height: 200,     // QR code height
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H  // Error correction level H (highest)
+      });
+    }
+
+    // Generate the QR code once after the page loads
+    updateQRCode();
+    // Update every second
+    setInterval(updateQRCode, 1000);
+  </script>
+</body>
+</html>

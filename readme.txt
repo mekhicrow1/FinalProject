@@ -1,0 +1,2 @@
+I created a Midway search page for anyone of all ages to search topics about Midway and the University as a whole. 
+I used a Golden color scheme instead of blue because I wanted it to pop and stand out. I left the voice box in whenever someone presses the 9 dots

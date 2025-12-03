@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Mekhi's Money Wheel</title>
+    <title>Money Spin Wheel</title>
+
+</head>
+
+<body>
+    <h1>Mekhi's Money Wheel</h1>
+
+    <div class="container">
+        <div class="pointer"></div>
+        <div id="wheel" class="wheel"></div>
+    </div>
+
+    <button id="spinBtn">SPIN</button>
+    <div id="result">Click “SPIN” to start.</div>
+
+<script>
+var names=["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
+var info={
+    Red: "$10",
+    Orange:"$100,000",
+    Yellow:"$0",
+    Green:"-$1,000",
+    Blue:"$1,000,000",
+    Purple:"$2"
+}; 
+
+var wheel=document.getElementById("wheel");
+var spinBtn=document.getElementById("spinBtn");
+var result=document.getElementById("result");
+
+var total=0;
+var current=0;
+var slice=360/names.length;
+var picked=0;
+
+function mod360(x){
+    var r=x%360;
+    return r<0?(r+360):r;
+};
+
+function centerAngle(i){
+    return i*slice+slice/2;
+};
+
+spinBtn.onclick=function(){
+    picked=Math.floor(Math.random()*names.length);
+    var target=centerAngle(picked);
+    var baseDelta=mod360(360-target-current);
+    total=total+baseDelta;
+    current=mod360(total);
+    result.textContent="Spinning";
+    spinBtn.disabled=true;
+    wheel.style.transform = "rotate("+total+"deg)";
+
+};
+
+wheel.addEventListener("transitionend", function(){
+    var colorname=names[picked];
+    result.textContent = info[colorname];
+    spinBtn.disabled=false;
+});
+
+</script>
+</body>
+</html>
